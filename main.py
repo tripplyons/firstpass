@@ -2,12 +2,15 @@ from tkinter import *
 from tkinter import ttk
 import hashlib
 
+with open('sites.txt', 'r') as f:
+    sites = f.read().splitlines()
+    sites = [site.upper() for site in sites if site != '']
+
 def derive_passwords(*args):
     try:
         base_phrase = str(hashphrase.get())
-        youtube_hash.set(hashlib.sha3_512((base_phrase + " YOUTUBE").encode('utf-8')).hexdigest())
-        discord_hash.set(hashlib.sha3_512((base_phrase + " DISCORD").encode('utf-8')).hexdigest())
-        twitter_hash.set(hashlib.sha3_512((base_phrase + " TWITTER").encode('utf-8')).hexdigest())
+        for i, site in enumerate(sites):
+            hash_vars[i].set(hashlib.sha3_512((base_phrase + " " + site).encode('utf-8')).hexdigest())
     except ValueError:
         pass
 
@@ -23,19 +26,19 @@ hashphrase = StringVar()
 hashphrase_entry = ttk.Entry(mainframe, width=25, textvariable=hashphrase)
 hashphrase_entry.grid(column=2, row=1)
 
-youtube_hash = StringVar()
-discord_hash = StringVar()
-twitter_hash = StringVar()
-ttk.Entry(mainframe, width=25, textvariable=youtube_hash).grid(column=2, row=2)
-ttk.Entry(mainframe, width=25, textvariable=discord_hash).grid(column=2, row=3)
-ttk.Entry(mainframe, width=25, textvariable=twitter_hash).grid(column=2, row=4)
+hash_vars = [StringVar() for _ in sites]
+i = 2
+for hash_var in hash_vars:
+    ttk.Entry(mainframe, width=25, textvariable=hash_var).grid(column=2, row=i)
+    i += 1
 
 ttk.Label(mainframe, text="Secret phrase").grid(column=1, row=1)
-ttk.Label(mainframe, text="YOUTUBE").grid(column=1, row=2)
-ttk.Label(mainframe, text="DISCORD").grid(column=1, row=3)
-ttk.Label(mainframe, text="TWITTER").grid(column=1, row=4)
+i = 2
+for site in sites:
+    ttk.Label(mainframe, text=site).grid(column=1, row=i)
+    i += 1
 
-ttk.Button(mainframe, text="Derive", command=derive_passwords).grid(column=1, row=5)
+ttk.Button(mainframe, text="Derive", command=derive_passwords).grid(column=1, row=i)
 
 for child in mainframe.winfo_children(): 
     child.grid_configure(padx=5, pady=5)
