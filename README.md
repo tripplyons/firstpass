@@ -1,5 +1,13 @@
 # FirstPass
 
+Changed to allow custom sites to be added to the list, in sites.txt.
+
+Original README Below:
+
+---
+
+# FirstPass
+
 Demonstration of a way to generate passwords using a 'correct horse battery staple like phrase' that you've memorised.
 
 ![img.png](images/theres_always_an_xkcd.png)
@@ -13,7 +21,6 @@ sha3_512({your_phrase} + " {DOMAIN}")
 This is incredibly dumb please don't look too much into it. The underlying code is trash too, I'm doing this at 2am on Christmas Eve with my cat sat on me.
 
 The point here is that it isn't hard to come up with a way to generate secure passwords and you don't need to rely on tools such as LastPass to do so provided you understand a bit of basic cryptography.
-
 
 # How To
 
