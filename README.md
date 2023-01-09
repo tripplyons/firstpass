@@ -1,6 +1,9 @@
 # FirstPass
 
-Changed to allow custom sites to be added to the list, in sites.txt.
+Changes from original repo:
+
+- Allow custom sites to be added to the list (in sites.txt)
+- Hide password input
 
 Original README Below:
 
