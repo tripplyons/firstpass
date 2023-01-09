@@ -23,7 +23,7 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
 hashphrase = StringVar()
-hashphrase_entry = ttk.Entry(mainframe, width=25, textvariable=hashphrase)
+hashphrase_entry = ttk.Entry(mainframe, width=25, textvariable=hashphrase, show='*')
 hashphrase_entry.grid(column=2, row=1)
 
 hash_vars = [StringVar() for _ in sites]
